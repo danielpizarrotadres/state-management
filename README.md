@@ -16,4 +16,20 @@
 
 - ### 2. Core concepts
         
-    - [ ] Some text explanation here
+    Before diving into core concepts, we need to know that a store is defined using `definedStore()` and that it requires a **unique** name, passed as the first argument:
+
+              
+                        import { defineStore } from 'pinia'
+
+                        // You can name the return value of `defineStore()`anything you want,
+                        // but it is best to use the name of the store and surround it with ùse`
+                        // and `Store`(e.g. `useUserStore`, `useCartStore`, `useProductStore`)
+                        // the first argument is a unique id of the store across your application
+                        export const useAlertStore = defineStore('alerts', {
+                          // other options ...
+                        })
+  
+
+    This name, also referred to as **id**, is necessary and is used by Pinia to connect the store to the devtools. Naming the returned function use... is a convention across composables to make it is usage idiomatic.
+
+  `defineStore()` accepts two distinct values for its second argument: a Setup function or an Options object.

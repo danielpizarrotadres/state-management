@@ -14,7 +14,7 @@
    
     - [ ] Not all applications need access to a global state, but if yours needs one, Pinia will make your life easier.
 
-- ### 2. Core concepts
+- ### 2. Core concepts: Defining a Store
         
     Before diving into core concepts, we need to know that a store is defined using `definedStore()` and that it requires a **unique** name, passed as the first argument:
 

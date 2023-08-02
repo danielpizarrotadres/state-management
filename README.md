@@ -56,3 +56,28 @@
     You can think of `state`as the `data`of the store, `getters` as the `computed` properties of the store, and `actions`as the `methods`.
 
     Option stores should feel intuitive and simple to get started with.
+
+
+  - ### Setup Stores 
+ 
+      There is also another possible syntax to define stores. Similar to the Vue Composition API's **setup function**, we can pass in a function that defines reactive properties and methods and returns an object with the properties and methods we want to expose.
+            
+                        import { defineStore } from 'pinia'
+                        import { ref, computed } from 'vue';
+
+                        export const useCounterStore = defineStore('counter', () => {
+                          const count = ref(0);
+                          const name = ref('Eduardo');
+                          const doubleCount = computed(() => count.value * 2);
+                          function increment() {
+                            count.value++
+                          }
+ 
+                          return { count, name, doubleCount, increment };
+                        })
+
+    In Setup Stores:
+
+    - [ ] `ref()`s become `state`properties
+    - [ ] `computed()`s become `getters`
+    - [ ] `function()`s become `actions`

@@ -58,7 +58,7 @@
     Option stores should feel intuitive and simple to get started with.
 
 
-  - ### Setup Stores 
+  - ### Setup Stores
  
       There is also another possible syntax to define stores. Similar to the Vue Composition API's **setup function**, we can pass in a function that defines reactive properties and methods and returns an object with the properties and methods we want to expose.
             
@@ -81,3 +81,18 @@
     - [ ] `ref()`s become `state`properties
     - [ ] `computed()`s become `getters`
     - [ ] `function()`s become `actions`
+
+  - ### Using the store
+ 
+      We are defining a store because the store will not be created until `use...Store()` is called within a component `<script setup>` (or within `setup()` **like all composables**):
+
+                        <script setup>
+                                import { useCounterStore } from '@/stores/counter'
+        
+                                // access the `store`variable anywhere in the component ✨
+                                const store = useCounterStore()
+                        </script>
+
+      You can define as many stores as you want and **you should define each store in a different file** to get the most out of Pinia (like automatically alowwing your bundler to code split and providing TypeScript inference).
+
+      Once the store is instantiated, you can access any property defined in `state`, `getters`, and `actions` directly on the store. We will look at these in detail in the next pages but autocompletion will help you.

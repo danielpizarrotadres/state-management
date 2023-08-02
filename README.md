@@ -153,3 +153,27 @@
  
                           return { count, $reset };
                         })
+
+- ### 4. Core concepts: Getters
+        
+    🏗️
+
+- ### 5. Core concepts: Actions
+        
+    Actions are the equivalent of **methods** in components. They can be defined with the `actions` property in `defineStore()` and **they are perfect to define business logic**
+
+                        import { defineStore } from 'pinia';
+
+                        export const useCounterStore = defineStore('counter', {
+                          state: () => ({ count: 0 }),
+                          actions: {
+                            increment() {
+                              this.count++;
+                            },
+                            randomizeCounter() {
+                              this.count = Math.round(100 * Math.random());
+                            },
+                          }
+                        })
+
+    Like **getters**, actions get access to the whole store instance through **this**. Unlike getters, `actions` **can be asynchronous**, you can `await` inside of actions any API call or even other actions! Here is an example using **Mande**. Note the library you use does not matter as long as you get a `Promise`, you could even use the native `fetch` function (browser only): 

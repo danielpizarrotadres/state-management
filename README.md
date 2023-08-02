@@ -96,3 +96,60 @@
       You can define as many stores as you want and **you should define each store in a different file** to get the most out of Pinia (like automatically alowwing your bundler to code split and providing TypeScript inference).
 
       Once the store is instantiated, you can access any property defined in `state`, `getters`, and `actions` directly on the store. We will look at these in detail in the next pages but autocompletion will help you.
+
+- ### 3. Core concepts: State
+        
+    The state is, most of the time, the central part of your store. People often start by defining the state that represents their app.
+
+                        import { defineStore } from 'pinia'
+
+                        export const useCounterStore = defineStore('counter', {
+                          state: () => {
+                            return {
+                              count: 0,
+                              name: 'Eduardo',
+                              isAdmin: true,
+                              items: [],
+                              hasChanged: true
+                           }
+                          }
+                        })
+  
+  - ### Accessing the `state`
+ 
+      By default, you can directly read and write to the state by accessing it through the `store`instance:
+
+                        <script setup>
+                                import { useCounterStore } from '@/stores/counter';
+                                const store = useCounterStore();
+                                store.count++
+                        </script>
+
+      Note you can not add a new state property if you don't define it in `state()`, it must contain the initial state. e.g.: we can't do `store.secondCount = 2`if `secondCount` is not defined in `state()`
+
+  - ### Resetting the `state`
+ 
+      In **Option Stores**, you can *reset* the state ot its initial value by calling the `$reset()` method on the store:
+
+                        <script setup>
+                                import { useCounterStore } from '@/stores/counter';
+                                const store = useCounterStore();
+
+                                store.$reset()
+                        </script>
+
+      Internally, this calls the `state()` function to create a new state object and replaces the current state with it.
+
+      In **Setup Stores**, you need to create your own `$reset()` method:
+
+                        import { defineStore } from 'pinia'
+                        import { ref } from 'vue';
+
+                        export const useCounterStore = defineStore('counter', () => {
+                          const count = ref(0);
+                          function $reset() {
+                            count.value = 0;
+                          }
+ 
+                          return { count, $reset };
+                        })

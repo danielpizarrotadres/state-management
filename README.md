@@ -33,3 +33,26 @@
     This name, also referred to as **id**, is necessary and is used by Pinia to connect the store to the devtools. Naming the returned function use... is a convention across composables to make it is usage idiomatic.
 
   `defineStore()` accepts two distinct values for its second argument: a Setup function or an Options object.
+
+
+  - ### Option Stores
+ 
+      Similar to Vue Options API, we can also pass an Options OBject with `state`, `actions`, and `getters` properties.
+            
+                        import { defineStore } from 'pinia'
+
+                        export const useCounterStore = defineStore('counter', {
+                          state: () => ({ count: 0, name: 'John Doe' }),
+                          getters: {
+                            doubleCount: (state) => state.count * 2,
+                          },
+                          actions: {
+                            increment() {
+                              this.count++;
+                            }
+                          }
+                        })
+
+    You can think of `state`as the `data`of the store, `getters` as the `computed` properties of the store, and `actions`as the `methods`.
+
+    Option stores should feel intuitive and simple to get started with.

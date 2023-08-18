@@ -1,6 +1,4 @@
 - ### 1. Getting Started
-        
-    Some text explanation here
 
   - ### What is a Store?
 
